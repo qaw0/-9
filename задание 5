@@ -1,65 +1,58 @@
-﻿using System;
+using System;
 
-namespace pel
+namespace p4ela
 {
-    public class Pet
+    using System;
+    class Pet
     {
         private string name;
         private int energy;
-
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get => name;
+            set => name = value;
         }
-
         public int Energy
         {
-            get { return energy; }
+            get => energy;
             set
             {
-                if (value >= 0 && value <= 100)
+                if (value < 0 || value > 100)
                 {
-                    energy = value;
+                    Console.WriteLine("Энергия должна быть от 0 до 100!");
                 }
                 else
                 {
-                    Console.WriteLine("Энергия должна быть от 0 до 100");
-                    energy = 50;
+                    energy = value;
                 }
             }
         }
-
-        public Pet(string petName, int petEnergy)
+        public Pet(string name, int energy)
         {
-            Name = petName;
-            Energy = petEnergy;
+            this.name = name;
+            Energy = energy; 
         }
-
         public void Play()
         {
-            if (energy >= 20)
-            {
-                Energy = energy - 20;
-            }
-            else
-            {
-                Energy = 0;
-            }
+            Energy = Math.Max(energy - 20, 0);
             Console.WriteLine($"{name} играет, энергия: {energy}.");
         }
-
         public void Rest()
         {
-            if (energy <= 70)
-            {
-                Energy = energy + 30;
-            }
-            else
-            {
-                Energy = 100;
-            }
+            Energy = Math.Min(energy + 30, 100);
             Console.WriteLine($"{name} отдыхает, энергия: {energy}.");
         }
     }
+    class Program
+    {
+        static void Main()
+        {
+            Pet tim = new Pet("рекс", 93);
+            tim.Play();  
+            tim.Rest();  
+            tim.Energy = 150; 
+            tim.Play();  
+        }
+    }
+
 }
