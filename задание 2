@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace pel
+{
+    public class Phone
+    {
+        private string brand;
+        private int batteryLevel;
+
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value; }
+        }
+
+        public int BatteryLevel
+        {
+            get { return batteryLevel; }
+            set
+            {
+                if (value < 0 && value > 100)
+                {
+                    Console.WriteLine("Заряд должен быть от 0 до 100");
+                }
+                else
+                {
+                    batteryLevel = value;
+                }
+            }
+        }
+        public Phone(string phoneBrand, int initialBattery)
+        {
+            Brand = phoneBrand;
+            BatteryLevel = initialBattery; 
+        }
+        public void  UsePhone()
+        {
+            if (BatteryLevel >= 10 && BatteryLevel <= 100) 
+            {
+                BatteryLevel = BatteryLevel - 10;
+            }
+            else
+            {
+                if (BatteryLevel > 100)
+                { 
+                    Console.WriteLine("Заряд должен быть от 0 до 100");
+                    BatteryLevel = 0;
+                }
+                
+            }
+            Console.WriteLine($"Телефон {Brand}, заряд: {BatteryLevel}%.");
+        }
+    }
+}
