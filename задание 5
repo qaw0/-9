@@ -1,0 +1,65 @@
+﻿using System;
+
+namespace pel
+{
+    public class Pet
+    {
+        private string name;
+        private int energy;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public int Energy
+        {
+            get { return energy; }
+            set
+            {
+                if (value >= 0 && value <= 100)
+                {
+                    energy = value;
+                }
+                else
+                {
+                    Console.WriteLine("Энергия должна быть от 0 до 100");
+                    energy = 50;
+                }
+            }
+        }
+
+        public Pet(string petName, int petEnergy)
+        {
+            Name = petName;
+            Energy = petEnergy;
+        }
+
+        public void Play()
+        {
+            if (energy >= 20)
+            {
+                Energy = energy - 20;
+            }
+            else
+            {
+                Energy = 0;
+            }
+            Console.WriteLine($"{name} играет, энергия: {energy}.");
+        }
+
+        public void Rest()
+        {
+            if (energy <= 70)
+            {
+                Energy = energy + 30;
+            }
+            else
+            {
+                Energy = 100;
+            }
+            Console.WriteLine($"{name} отдыхает, энергия: {energy}.");
+        }
+    }
+}
