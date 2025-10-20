@@ -1,58 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace pel
+namespace p4ela
 {
     public class Phone
     {
         private string brand;
         private int batteryLevel;
-
         public string Brand
         {
             get { return brand; }
             set { brand = value; }
         }
-
         public int BatteryLevel
         {
             get { return batteryLevel; }
             set
             {
-                if (value < 0 && value > 100)
-                {
-                    Console.WriteLine("Заряд должен быть от 0 до 100");
-                }
-                else
+                if (value >= 0 && value <= 100)
                 {
                     batteryLevel = value;
                 }
-            }
-        }
-        public Phone(string phoneBrand, int initialBattery)
-        {
-            Brand = phoneBrand;
-            BatteryLevel = initialBattery; 
-        }
-        public void  UsePhone()
-        {
-            if (BatteryLevel >= 10 && BatteryLevel <= 100) 
-            {
-                BatteryLevel = BatteryLevel - 10;
-            }
-            else
-            {
-                if (BatteryLevel > 100)
-                { 
-                    Console.WriteLine("Заряд должен быть от 0 до 100");
-                    BatteryLevel = 0;
+                else
+                {
+                    Console.WriteLine("Заряд должен быть от 0 до 100!");
                 }
-                
+            }
+        }
+        public Phone(string brand, int batteryLevel)
+        {
+            Brand = brand;
+            BatteryLevel = batteryLevel;
+        }
+        public void UsePhone()
+        {
+            BatteryLevel -= 56;
+            if (BatteryLevel < 0)
+            {
+                BatteryLevel = 0;
             }
             Console.WriteLine($"Телефон {Brand}, заряд: {BatteryLevel}%.");
+        }
+        public static void Main(string[] args)
+        {
+            Phone myPhone = new Phone("iphone", 93); 
+            myPhone.UsePhone();
+            myPhone.UsePhone();
+            myPhone.BatteryLevel = -56;
+            myPhone.UsePhone();
         }
     }
 }
